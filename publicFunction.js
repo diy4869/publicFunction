@@ -24,8 +24,8 @@ class publicFunction {
     let t = typeof time === 'number' && time.toString().length === 10 ? time.toString() * 1000 : time.valueOf()
     let date = new Date(t)
     let year = date.getFullYear(time)
-    let month = date.getMonth(time) + 1
-    let day = date.getDate(time)
+    let month = date.getMonth(time) + 1 <= 9 ? '0' + date.getMonth(time) : date.getMonth(time)
+    let day = date.getDate(time) <= 9 ? '0' + date.getDate(time) : date.getDate(time)
     let hour = date.getHours(time) <= 9 ? '0' + date.getHours(time) : date.getHours(time)
     let minute = date.getMinutes(time) <= 9 ? '0' + date.getMinutes(time) : date.getMinutes(time)
     let seconds = date.getSeconds(time) <= 9 ? '0' + date.getSeconds(time) : date.getSeconds(time)
@@ -66,10 +66,25 @@ class publicFunction {
     let minHeight = height - (scrollTop + window.innerHeight)
     if (height === scrollTop + window.innerHeight) {
       fn()
-      fn.call(this)
     }
     return minHeight
-	}
+  }
+  /** 
+   *  @url {string} url 一个有效的get参数地址
+   * */ 
+  static getQueryString (url) {
+    if (typeof url === 'string') {
+      let obj = {}
+      let arr = url.split('?')[url.split('?').length - 1].split('&')
+      arr.filter(item => {
+        let split = item.split('=')
+        obj[split[0]] = split[1]
+      })
+      return obj
+    } else {
+      throw new Error('このユーアールアドレスは有効なアドレスではありません')
+    }
+  }
 }
 publicFunction.filterQuery([1,2,3,4], [3, 4])
 publicFunction.timeFormat(new Date())
@@ -77,4 +92,4 @@ document.body.onscroll = function () {
   publicFunction.isBottom()
 }
 
-export default publicFunction
+// export default publicFunction

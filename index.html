@@ -20,9 +20,63 @@
 </body>
 <script src="./publicFunction.js"></script>
 <script>
-  function test(params) {
-    console.log(arguments)
-  }
-  test(2)
+    var arr = [1,2,3,[4, 2] ,5,6]
+    var arr2 = this.deepCopyArray(arr)
+    arr2[3][0] = 666
+    arr2[2] = 4
+    console.log(...arr)
+    console.log(...arr2)
+
+    function deepCopyArray (arr) {
+      return (function () {
+        let Arr = []
+        if (Array.isArray(arr)) {
+          arr.map((item, index) => {
+            Arr[index] = item
+          })
+        }
+        return Arr
+      })()
+      return Arr
+    }
+    var obj = {
+      name: 123,
+      age: 456
+    }
+    var obj2 = obj
+    var obj2 = this.deepCopyObject(obj)
+    obj2.name = '李四'
+    console.log(obj)
+    console.log(obj2)
+
+    function deepCopyObject (obj) {
+      return (function () {
+        let Obj = {}
+        if (obj instanceof Object) {
+          for (let i of Object.entries(obj)) {
+            console.log(i)
+            Obj[i[0]] = i[1]
+          }
+        }
+        return Obj
+      })()
+      return Obj
+    }
+// throttle () {
+			// 	let startTime = Date.now()
+			// 	return function () {
+			// 		let now = Date.now()
+			// 		console.log(now - startTime, 1000)
+			// 		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+			// 		let timer;
+			// 		if (timer) {
+			// 			clearTimeout(timer)
+			// 		}
+			// 		setTimeout(() => {
+			// 			console.log(scrollTop)
+			// 		}, 1000);
+			// 	}
+
+			// },
 </script>
 </html>
