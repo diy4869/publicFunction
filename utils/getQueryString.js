@@ -11,6 +11,6 @@ export default function getQueryString (url) {
     })
     return obj
   } else {
-    throw new Error('このユーアールアドレスは有効なアドレスではありません')
+    throw new TypeError('このユーアールアドレスは有効なアドレスではありません')
   }
 }
